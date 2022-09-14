@@ -25,9 +25,9 @@ const displayEntries = () => {
       const email = `<td class="td">${entry.email}</td>`;
       const password = `<td class="td">${entry.password}</td>`;
       const dob = `<td class="td">${entry.dob}</td>`;
-      const accseptConditions = `<td class="td">${entry.accseptConditions}</td>`;
+      const acceptConditions = `<td class="td">${entry.acceptConditions}</td>`;
 
-      const row = `<tr>${name} ${email} ${password} ${dob} ${accseptConditions}</tr>`;
+      const row = `<tr>${name} ${email} ${password} ${dob} ${acceptConditions}</tr>`;
       return row;
     })
     .join("\n");
@@ -55,14 +55,14 @@ const saveUserFrom = (event) => {
   let email = document.getElementById("email").value;
   let password = document.getElementById("password").value;
   let dob = document.getElementById("dob").value;
-  let accseptConditions = document.getElementById("agree").checked;
+  let acceptConditions = document.getElementById("agree").checked;
 
   let entry_obj = {
     name,
     email,
     password,
     dob,
-    accseptConditions,
+    acceptConditions,
   };
 
   Entries.push(entry_obj);
@@ -83,8 +83,8 @@ function getAge(today, birthDate) {
   // var birthDate = new Date(DOB);
 
   var age = today.getFullYear() - birthDate.getFullYear();
-  var v = today.getMonth() - birthDate.getMonth();
-  if (v < 0 || (v === 0 && today.getDate() < birthDate.getDate())) {
+  var m = today.getMonth() - birthDate.getMonth();
+  if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
     age--;
   }
   return age;
@@ -100,9 +100,9 @@ dateELE.addEventListener("change", () => {
 
   age = getAge(Today, dob);
 
-  dateELE.style.border = "2px solid rgba(0, 0, 0, 0.7)";
+  dateELE.style.border = "2px solid rgba(0, 0, 0, 0.4)";
   if (age < 18 || age > 55) {
-    dateELE.setCustomValidity("Your age does not lie between 18 and 55");
+    dateELE.setCustomValidity("Your age is not lies between 18 and 55");
     dateELE.style.border = "2px solid red";
     return;
   } else {
@@ -116,7 +116,7 @@ email.addEventListener("input", () => validate(email));
 
 function validate(ele) {
   if (ele.validity.typeMismatch) {
-    ele.setCustomValidity("The Email is not in the right format ,please check and refill again!");
+    ele.setCustomValidity("The Email is not in the right format!!!");
     ele.reportValidity();
   } else {
     ele.setCustomValidity("");
